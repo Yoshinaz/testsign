@@ -1,8 +1,8 @@
-cmd=$[$1]
-arg=$[$2]
+cmd=$1
+arg=$2
 
-if [ "$cmd" = "ch" ]
-then 
+if [ "$cmd" = "ch" ] || [ "$cmd" = "sk" ] || [ "$cmd" = "ck" ]
+then
     if [ "$arg" = "1" ]
     then 
         git config --global user.signingkey 13acda96afe630facf161a97b56b3022afb609a9
@@ -12,5 +12,6 @@ then
     fi
 elif [ "$cmd" = "vf" ]
 then
-    git verify-commit $arg
+    COMMIT_ID=$(git rev-parse --verify HEAD)
+    git verify-commit $COMMIT_ID
 fi
